@@ -49,10 +49,10 @@ task deobfJar(type: Jar) {
 // Create API library zip
 task apiJar(type: Jar) {
     from(sourceSets.main.java) {
-        include "com/azanor/baubles/api/**"
+        include "baubles/api/**"
     }
     from(sourceSets.main.output) {
-        include "com/azanor/baubles/api/**"
+        include "baubles/api/**"
     }
     classifier = 'api'
 }
