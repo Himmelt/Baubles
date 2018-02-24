@@ -1,6 +1,6 @@
 buildscript {
     repositories {
-        mavenCentral()
+        jcenter()
         maven {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
@@ -17,30 +17,27 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.7.10-1.0.1.10"
-group= "com.azanor.baubles" 
+version = "1.7.10-1.0.2"
+group = "com.azanor.baubles"
 archivesBaseName = "Baubles"
 
 minecraft {
-    version = "1.7.10-10.13.2.1236"
-    assetDir = "eclipse/assets"
+    version = "1.7.10-10.13.4.1614-1.7.10"
+    runDir = "build/run"
 }
 
-processResources
-{
-    // replace stuff in mcmod.info, nothing else
+processResources {
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-                
-        // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+        expand 'version': project.version, 'mcversion': project.minecraft.version
     }
-        
-    // copy everything else, thats not the mcmod.info
+
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
-    
 }
 
 // Create deobf dev jars
@@ -52,7 +49,10 @@ task deobfJar(type: Jar) {
 // Create API library zip
 task apiJar(type: Jar) {
     from(sourceSets.main.java) {
-        include "baubles/api/**"
+        include "com/azanor/baubles/api/**"
+    }
+    from(sourceSets.main.output) {
+        include "com/azanor/baubles/api/**"
     }
     classifier = 'api'
 }
