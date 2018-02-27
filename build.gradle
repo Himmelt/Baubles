@@ -21,6 +21,11 @@ version = "1.7.10-1.0.2"
 group = "com.azanor.baubles"
 archivesBaseName = "Baubles"
 
+sourceCompatibility = targetCompatibility = "1.7"
+compileJava {
+    sourceCompatibility = targetCompatibility = "1.7"
+}
+
 minecraft {
     version = "1.7.10-10.13.4.1614-1.7.10"
     runDir = "build/run"
